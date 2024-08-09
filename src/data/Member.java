@@ -73,7 +73,7 @@ public class Member implements Comparable<Member> {
 
     @Override
     public int compareTo(Member o) {
-        return this.getMemberName().compareTo(o.getMemberName());
+        return this.getMemberName().compareToIgnoreCase(o.getMemberName());
     }
 
 }

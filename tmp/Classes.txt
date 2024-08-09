@@ -1,0 +1,5 @@
+C001|	Yoga Basics|	Mon/Wed/Fri 6pm|	20|	M001, M003|	E004
+C002|	HIIT Workout|	Tue/Thu 7am|	15|	M002, M004|	E002, E001
+C003|	Spin Class|	Mon/Fri 8am|	12|	M001, M005|	E003
+C004|	Weightlifting|	Wed/Sat 6pm|	10|	M003, M004|	E005, E002
+C005|	Pilates|	Tue/Thu 6pm|	18|	M002, M003|	E004

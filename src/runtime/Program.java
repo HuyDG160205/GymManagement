@@ -6,6 +6,7 @@
 package runtime;
 
 import data.Member;
+import management.ClassManagement;
 import management.MemberManagement;
 
 /**
@@ -18,11 +19,16 @@ public class Program {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MemberManagement mM = new MemberManagement();
-        mM.loadFromFile(".\\Members.txt");
+        ClassManagement cL= new ClassManagement();
         
-        mM.DisplayAllMember();
         
+        cL.mM.loadFromFile(".\\Members.txt");
+        cL.eM.loadFromFile(".\\Equipment.txt");
+        cL.loadFromFile(".\\Classes.txt");
+        cL.mM.saveToFile(".\\Members.txt");
+        cL.eM.saveToFile(".\\Equipment.txt");
+        cL.saveToFile(".\\Classes.txt");
+        cL.displayAllClasses();
     }
     
 }

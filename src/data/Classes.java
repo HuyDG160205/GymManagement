@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Gia Huy
  */
-public class Class {
+public class Classes {
 
     private String classId;
     private String name;
@@ -20,10 +20,10 @@ public class Class {
     private ArrayList<Member> members;
     private ArrayList<Equipment> equipment;
 
-    public Class() {
+    public Classes() {
     }
 
-    public Class(String classId, String name, String schedule, int capacity, ArrayList<Member> members, ArrayList<Equipment> equipment) {
+    public Classes(String classId, String name, String schedule, int capacity, ArrayList<Member> members, ArrayList<Equipment> equipment) {
         this.classId = classId;
         this.name = name;
         this.schedule = schedule;
@@ -82,27 +82,23 @@ public class Class {
         
         for (Member member : members) {
             str.append(member.getMemberID()).append(",");
-            
-            str.substring(0, str.length()-2);
         }
         
-        return str.toString();
+        return str.substring(0,str.length()-1);
     }
     public String getListOfEquipmentID(){
         StringBuilder str = new StringBuilder();
         
         for (Equipment equipment1 : equipment) {
             str.append(equipment1.getEquipmentID()).append(",");
-            
-            str.substring(0,str.length()-2);
         }
         
-        return str.toString();
+        return str.substring(0,str.length()-1);
     }
 
     @Override
     public String toString() {
-        String str = String.format("", classId,name,schedule,capacity,getListOfMemberID(),getListOfEquipmentID());
+        String str = String.format("%4s|%-15s|%20s|%4d|%-15s|%-15s", classId,name,schedule,capacity,getListOfMemberID(),getListOfEquipmentID());
         
         return str;
     }

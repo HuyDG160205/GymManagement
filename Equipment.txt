@@ -1,5 +1,5 @@
-E001|	Treadmill	|Cardio	|10	|Good
-E002|	Dumbbells	|Strength|	50|	Excellent
-E003|	Stationary Bike	|Cardio	|8	|Fair
-E004|	Yoga Mats	|Flexibility|	30|	Good	
-E005|	Bench Press	|Strength|	5|	Good	
+E005|Bench Press                   |Strength       |   5|Good
+E001|Treadmill                     |Cardio         |  10|Good
+E002|Dumbbells                     |Strength       |  50|Excellent
+E003|Stationary Bike               |Cardio         |   8|Fair
+E004|Yoga Mats                     |Flexibility    |  30|Good

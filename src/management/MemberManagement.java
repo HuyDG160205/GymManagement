@@ -8,7 +8,9 @@ package management;
 import data.Member;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,18 +89,18 @@ public class MemberManagement extends HashMap<String, Member>{
             }
         }while(!this.containsKey(id));
         
-        System.out.println("The member information");
+        System.out.println("The Member information");
         System.out.println(this.get(id));
         
-        String name = Inputter.getString("Please input member name to update, leave blank", "This field is required", "\\w*");
+        String name = Inputter.getString("Please input member name to update, leave blank", "This field is required", ".*");
         if(!name.isEmpty()){
             this.get(id).setMemberName(name);
         }
-        String address = Inputter.getString("Please input new address to update, leave blank", "This field is required", "\\w*");
+        String address = Inputter.getString("Please input new address to update, leave blank", "This field is required", ".*");
         if(!address.isEmpty()){
             this.get(id).setAddress(address);
         }
-        String phone = Inputter.getString("Please input phone, leave blank", "This field is required");
+        String phone = Inputter.getString("Please input phone, leave blank", "This field is required", ".*");
         if(!phone.isEmpty()){
             this.get(id).setContactInformation(phone);
         }
@@ -118,6 +120,23 @@ public class MemberManagement extends HashMap<String, Member>{
         }
     }
     
+    public boolean saveToFile(String url){
+        File f = new File(url);
+        try{
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(f));
+            for (Member value : this.values()) {
+                writer.write(value.toString());
+                writer.write("\n");
+            }
+            writer.flush();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println("Failed to save to file" + e);
+            return false;
+        }
+    }
+
     
     
 }

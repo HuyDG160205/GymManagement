@@ -9,7 +9,11 @@ import data.Equipment;
 import data.Member;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import utils.Inputter;
@@ -34,6 +38,8 @@ public class EquipmentManager extends HashMap<String, Equipment> {
                 String condition = st.nextToken().trim();
 
                 this.put(id, new Equipment(id, name, type, quantity, condition));
+                
+                
                 line = reader.readLine();
             }
 
@@ -67,18 +73,19 @@ public class EquipmentManager extends HashMap<String, Equipment> {
         do {
             id = Inputter.getString("Please input equipment id E---", "This field is required E---", "E\\d{3}");
 
-            if (this.containsKey(id)) {
-                System.out.println("This id already exised");
+            if (!this.containsKey(id)) {
+                System.out.println("This id already existed");
             }
-        } while (this.containsKey(id));
+        } while (!this.containsKey(id));
         
+        System.out.println("The Equipment information");
+        System.out.println(this.get(id));
         
-        
-        String name = Inputter.getString("Please input a name, leave blank", "This field is required", "\\w*");
+        String name = Inputter.getString("Please input a name, leave blank", "This field is required", ".*");
         if(!name.isEmpty()){
             this.get(id).setEquipmentName(name);
         }
-        String type = Inputter.getString("Please input a new type, leave blank", "This field is required", "\\w*" );
+        String type = Inputter.getString("Please input a new type, leave blank", "This field is required", ".*" );
         if(!type.isEmpty()){
             this.get(id).setType(type);
         }
@@ -86,11 +93,44 @@ public class EquipmentManager extends HashMap<String, Equipment> {
         if(!quantity.isEmpty()){
             this.get(id).setQuantity(Integer.parseInt(quantity));
         }
-        String condition = Inputter.getString("Please input equipment condition", "This field is required", "\\w*");
+        String condition = Inputter.getString("Please input equipment condition", "This field is required", ".*");
         if(!condition.isEmpty()){
             this.get(id).setCondition(condition);
         }
 
     }
+    
+    
+    public void sortNPrintInOrd(){
+        ArrayList<Equipment> tmp = new ArrayList<>(this.values());
+        
+        Collections.sort(tmp);
+        
+        for (Equipment equipment : tmp) {
+            System.out.println(equipment);
+        }
+    }
+    
+    public boolean saveToFile(String url){
+        File f = new File(url);
+        try{
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(f));
+            for (Equipment value : this.values()) {
+                writer.write(value.toString());
+                writer.write("\n");
+            }
+            writer.flush();
+            
+            return true;
+        }catch(Exception e){
+            System.out.println("Failed to save to file" + e);
+            return false;
+        }
+    }
+
+    
+    
+    
+    
 
 }

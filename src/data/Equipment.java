@@ -72,7 +72,7 @@ public class Equipment implements Comparable<Equipment>{
 
     @Override
     public int compareTo(Equipment o) {
-        return this.getEquipmentName().compareTo(o.getEquipmentName());
+        return o.getEquipmentName().compareToIgnoreCase(this.getEquipmentName());
     }
     
     
