@@ -1,5 +1,5 @@
-E001|	Treadmill	|Cardio	|10	|Good|	2022-08-01
-E002|	Dumbbells	|Strength|	50|	Excellent|	2022-09-15
-E003|	Stationary Bike	|Cardio	|8	|Fair|	2021-11-10
-E004|	Yoga Mats	|Flexibility|	30|	Good	|2023-01-05
-E005|	Bench Press	|Strength|	5|	Good	|2022-12-12
+E001|	Treadmill	|Cardio	|10	|Good
+E002|	Dumbbells	|Strength|	50|	Excellent
+E003|	Stationary Bike	|Cardio	|8	|Fair
+E004|	Yoga Mats	|Flexibility|	30|	Good	
+E005|	Bench Press	|Strength|	5|	Good	

@@ -5,7 +5,8 @@
  */
 package runtime;
 
-import java.time.DayOfWeek;
+import data.Member;
+import management.MemberManagement;
 
 /**
  *
@@ -17,6 +18,10 @@ public class Program {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        MemberManagement mM = new MemberManagement();
+        mM.loadFromFile(".\\Members.txt");
+        
+        mM.DisplayAllMember();
         
     }
     
