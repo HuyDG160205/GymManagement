@@ -104,15 +104,15 @@ public class MemberManagement extends HashMap<String, Member>{
         if(!phone.isEmpty()){
             this.get(id).setContactInformation(phone);
         }
-        String type = Inputter.getString("Please input a Type (standard/premium)", "Please input either standard/premium");
+        String type = Inputter.getString("Please input a Type (standard/premium)", "Please input either standard/premium", ".*");
         if(!type.isEmpty()){
             this.get(id).setMembershipType(type);
         }
     }
     
-    public void sortNPrintinOrd(){
+    public void sortNPrintInOrd(){
         ArrayList<Member> member = new ArrayList<>(this.values());
-        
+        if(member.size() == 0) return;
         Collections.sort(member);
         
         for (Member member1 : member) {

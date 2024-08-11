@@ -83,6 +83,7 @@ public class Classes {
         for (Member member : members) {
             str.append(member.getMemberID()).append(",");
         }
+        if(str.toString().isEmpty()) return "";
         
         return str.substring(0,str.length()-1);
     }
@@ -92,9 +93,22 @@ public class Classes {
         for (Equipment equipment1 : equipment) {
             str.append(equipment1.getEquipmentID()).append(",");
         }
+        if(str.toString().isEmpty()) return "";
         
         return str.substring(0,str.length()-1);
     }
+    
+    public boolean removeMemberInClass(Member member){
+        
+        return members.remove(member);
+    }
+    
+    public boolean removeEquipmentInClass(Equipment eqip){
+        return equipment.remove(eqip);
+    }
+    
+    
+    
 
     @Override
     public String toString() {

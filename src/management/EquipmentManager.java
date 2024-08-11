@@ -103,7 +103,7 @@ public class EquipmentManager extends HashMap<String, Equipment> {
     
     public void sortNPrintInOrd(){
         ArrayList<Equipment> tmp = new ArrayList<>(this.values());
-        
+        if(tmp.size() == 0) return;
         Collections.sort(tmp);
         
         for (Equipment equipment : tmp) {

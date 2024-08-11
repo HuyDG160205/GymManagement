@@ -80,6 +80,8 @@ public class ClassManagement {
         do {
             id = Inputter.getString("Please input a new class to add", "This field is requried", "C\\d{3}");
         } while (cM.containsKey(id));
+        
+        
         String name = Inputter.getString("Please input a new class name", "This field is required");
         String schedule = Inputter.getString("Please input schedule, if no then leave blank", "must be like XXX/XXX/... Xam/pm", "\\w{3}(/\\w{3})* \\d{1,2}(am|pm)");
         int quantity = Inputter.getAnInteger("Please input quantity", "must be higher than 0", 0, Integer.MAX_VALUE);
@@ -129,9 +131,12 @@ public class ClassManagement {
     }
 
     public void displayAllClasses() {
-        cM.forEach((key, value) -> {
-            System.out.println(value.toString());
-        });
+        ArrayList<Classes> tmp = new ArrayList<>(cM.values());
+        
+        for (Classes classes : tmp) {
+            System.out.println(classes);
+        }
+        
     }
 
     public void updateClasses() {
@@ -142,22 +147,28 @@ public class ClassManagement {
         do {
             id = Inputter.getString("Please input a class id to update", "This field is required");
 
-            if (!cM.containsKey(eM)) {
+            if (!cM.containsKey(id)) {
                 System.out.println("This id doesnt exist");
             }
         } while (!cM.containsKey(id));
 
-        String name = Inputter.getString("Please input a new class name, leave blank", "This field is required", "\\w*");
-        cM.get(id).setName(name);
+        String name = Inputter.getString("Please input a new class name, leave blank", "This field is required", "\\.*");
+        if(!name.isEmpty()){
+            cM.get(id).setName(name);
+        }
         String schedule = Inputter.getString("Please input schedule, if no then leave blank", "must be like XXX/XXX/... Xam/pm", "^(\\w{3}(/\\w{3})* \\d{1,2}(am|pm))*$");
+        if(!schedule.isEmpty()){
+            cM.get(id).setSchedule(schedule);
+        }
+        
         int quantity;
         do{
             quantity = Inputter.getAnInteger("Please input quantity", "must be higher than 0", 0, Integer.MAX_VALUE);
             
-            if(quantity <= cM.get(id).getListOfMemberID().length()){
+            if(quantity < cM.get(id).getMembers().size()){
                 System.out.println("capacity must be higher than the current member in the class");
             }
-        }while(quantity <= cM.get(id).getListOfMemberID().length());
+        }while(quantity < cM.get(id).getMembers().size());
         cM.get(id).setCapacity(quantity);
         
         String member;
@@ -213,11 +224,71 @@ public class ClassManagement {
         do{
             id = Inputter.getString("Please input an ID to remove", "This field is required");
             
-            if(!mM.containsKey(eM)){
+            if(!mM.containsKey(id)){
                 System.out.println("This id doesnt exist");
             }
-        }while(!mM.containsKey(eM));
+        }while(!mM.containsKey(id));
+        
+        boolean isDup = false;
+        for (Classes value : cM.values()) {
+            if(value.getMembers().contains(mM.get(id))){
+                isDup= true;
+            }
+        }
+        if(isDup && Inputter.getString("Member exist in classes do you want to delete?, (Y/N)", "This field is required").equals("Y")){
+            for (Classes value : cM.values()) {
+                value.removeMemberInClass(mM.get(id));
+            }
+        }
+        mM.remove(id);
+        System.out.println("Successfuly removed");
     }
+    
+    public void removeEquipment(){
+        
+        String id;
+        do{
+            id = Inputter.getString("Please input an ID to remove", "This field is required");
+            
+            if(!eM.containsKey(id)){
+                System.out.println("This id doesnt exist");
+            }
+        }while(!eM.containsKey(id));
+        
+        boolean isDup = false;
+        for (Classes value : cM.values()) {
+            if(value.getEquipment().contains(eM.get(id))){
+                isDup= true;
+                break;
+            }
+        }
+        if(isDup && Inputter.getString("Equipment exist in classes do you want to delete?, (Y/N)", "This field is required").equals("Y")){
+            for (Classes value : cM.values()) {
+                value.removeEquipmentInClass(eM.get(id));
+            }
+        }
+        eM.remove(id);
+        System.out.println("Successfuly removed");
+    }
+    
+    public void removeClass(){
+        String id;
+        do{
+            id = Inputter.getString("Please input an ID to remove", "This field is required");
+            
+            if(!cM.containsKey(id)){
+                System.out.println("This id doesnt exist");
+            }
+        }while(!cM.containsKey(id));
+        
+        if(Inputter.getString("Do you wish to delete this class? (Y/N)", "This field is requried").equalsIgnoreCase("y")){
+            cM.remove(id);
+        }
+        System.out.println("Removed successfully");
+        
+    }
+    
+    
     
     public boolean saveToFile(String url){
         File f = new File(url);
