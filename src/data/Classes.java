@@ -80,20 +80,23 @@ public class Classes {
     public String getListOfMemberID(){
         StringBuilder str = new StringBuilder();
         
+        if(members.size() ==0) return "";
+        
         for (Member member : members) {
             str.append(member.getMemberID()).append(",");
         }
-        if(str.toString().isEmpty()) return "";
         
         return str.substring(0,str.length()-1);
     }
     public String getListOfEquipmentID(){
         StringBuilder str = new StringBuilder();
         
+        
+        if(equipment.isEmpty()) return "";
+        
         for (Equipment equipment1 : equipment) {
             str.append(equipment1.getEquipmentID()).append(",");
         }
-        if(str.toString().isEmpty()) return "";
         
         return str.substring(0,str.length()-1);
     }

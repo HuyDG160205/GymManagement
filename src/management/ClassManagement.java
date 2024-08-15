@@ -60,7 +60,9 @@ public class ClassManagement {
         String[] membersID = member.split(",");
         ArrayList<Member> tmp = new ArrayList<>();
         for (String member1 : membersID) {
-            tmp.add(mM.get(member1.trim()));
+            if(mM.containsKey(member1)){
+                tmp.add(mM.get(member1.trim()));
+            }
         }
         return tmp;
     }
@@ -70,7 +72,9 @@ public class ClassManagement {
         ArrayList<Equipment> tmp = new ArrayList<>();
 
         for (String string : equipmentsID) {
-            tmp.add(eM.get(string.trim()));
+            if(eM.containsKey(string)){
+                tmp.add(eM.get(string.trim()));
+            }
         }
         return tmp;
     }
@@ -120,7 +124,7 @@ public class ClassManagement {
                 System.out.println("This Equipment doesnt exist");
                 continue;
             }
-            if (equipList.contains(eM.containsKey(equipment))) {
+            if (equipList.contains(eM.get(equipment))) {
                 System.out.println("Theres already this equipment in the class");
                 continue;
             }
@@ -156,7 +160,7 @@ public class ClassManagement {
         if(!name.isEmpty()){
             cM.get(id).setName(name);
         }
-        String schedule = Inputter.getString("Please input schedule, if no then leave blank", "must be like XXX/XXX/... Xam/pm", "^(\\w{3}(/\\w{3})* \\d{1,2}(am|pm))*$");
+        String schedule = Inputter.getString("Please input schedule, if no then leave blank", "must be like XXX/XXX/... Xam/pm", "^(\\w{3}(/\\w{3})* \\d{1,2}(am|pm)){0,1}$");
         if(!schedule.isEmpty()){
             cM.get(id).setSchedule(schedule);
         }
@@ -201,13 +205,13 @@ public class ClassManagement {
         String equipment;
         ArrayList<Equipment> equipList = new ArrayList<>();
         do {
-            equipment = Inputter.getString("Please input equipID to add, leave blank if done", "This field is required", "(E\\d{3})*");
+            equipment = Inputter.getString("Please input equipID to add, leave blank if done", "This field is required", "(E\\d{3}){0,1}");
 
             if (!eM.containsKey(equipment)) {
                 System.out.println("This Equipment doesnt exist");
                 continue;
             }
-            if (equipList.contains(eM.containsKey(equipment))) {
+            if (equipList.contains(eM.get(equipment))) {
                 System.out.println("Theres already this equipment in the class");
                 continue;
             }
@@ -220,8 +224,11 @@ public class ClassManagement {
     
     public void removeMember(){
         
+        
         String id;
         do{
+            if(mM.isEmpty()) return;
+        
             id = Inputter.getString("Please input an ID to remove", "This field is required");
             
             if(!mM.containsKey(id)){
@@ -246,8 +253,11 @@ public class ClassManagement {
     
     public void removeEquipment(){
         
+        
         String id;
         do{
+            if(eM.isEmpty()) return;
+        
             id = Inputter.getString("Please input an ID to remove", "This field is required");
             
             if(!eM.containsKey(id)){

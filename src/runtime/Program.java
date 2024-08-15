@@ -39,6 +39,7 @@ public class Program {
         MemberMenu.addNewOption("Sort and print the list of members ascending by name");
         MemberMenu.addNewOption("View and update existing member information");
         MemberMenu.addNewOption("Delete a member");
+        MemberMenu.addNewOption("Count member and print");
         EquipmentMenu.addNewOption("Add new equipment");
         EquipmentMenu.addNewOption("Sort and print the equipment list descending by name.");
         EquipmentMenu.addNewOption("Update and manage equipment inventory");
@@ -69,6 +70,9 @@ public class Program {
                         case 4: {
                             cL.removeMember();
                             break;
+                        }
+                        case 5 :{
+                            cL.mM.countMemberShipType();
                         }
                     }
                     break;

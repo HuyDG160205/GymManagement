@@ -1,4 +1,5 @@
 E005|Bench Press                   |Strength       |   5|Good
+E006|new equip                     |new type       |   3|bad
 E001|Treadmill                     |Cardio         |  10|Good
 E002|Dumbbells                     |Strength       |  50|Excellent
 E003|Stationary Bike               |Cardio         |   8|Fair

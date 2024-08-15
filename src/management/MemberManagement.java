@@ -136,7 +136,27 @@ public class MemberManagement extends HashMap<String, Member>{
             return false;
         }
     }
-
     
+    public void countMemberShipType(){
+        String x = Inputter.getString("Please input memberShipType", "This field si required");
+        
+        int count =0;
+        for (Member thi : this.values()) {
+            if(x.equalsIgnoreCase(thi.getMembershipType())){
+                System.out.println(thi);
+                count++;
+            }
+        }
+        
+        System.out.println("Có " + count + " Member được tìm thấy");
+        
+    }
+
+    /*
+        thêm chức năng mới in danh sách các members tó type = x (x nhập từ bàn phím không phân biệt hoa thường)
+        và cho biết tất cả bao nhiêu member được tìm thấy
+    
+    
+    */
     
 }
